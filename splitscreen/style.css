@@ -1,0 +1,71 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.container .left{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50vw;
+    height: 100%;
+    border-right: 1px solid black;
+    background: hotpink;
+    z-index: 10;
+    transition: 0s;
+    overflow: hidden;
+}
+
+.container .right{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: red;
+}
+
+.container .right .map{
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.container .burger{
+    position: absolute;
+    left: 50vw;
+    bottom: 50%;
+    transform: translateX(-25px);
+    width: 50px;
+    height: 50px;
+    z-index: 100;
+    border: 1px solid black;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.container .left .map{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    /* position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: blue;
+    /* center the child using a negative left */
+    /* left: calc(50% - 50vw); */
+    /* or */
+    /* left: 50%;
+    transform: translateX(-50%); */
+} 

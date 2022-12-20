@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split screen</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+</head>
+<body>
+    <section id="container" class="container">
+        <img class="burger" id="mBurger" src="./menu.png" alt="burger"/>
+        <div id="leftSplit" class="left">
+            <div id="map" class="map"></div>
+        </div>
+        <div id="rightSplit" class="right">
+            <div id="map1" class="map"></div>
+        </div>
+    </section>
+
+    <script>
+        var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            maxZoom: 17,
+            attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        });
+        var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+            maxZoom: 20,
+            subdomains:['mt0','mt1','mt2','mt3']
+        });
+
+        var googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+            maxZoom: 20,
+            subdomains:['mt0','mt1','mt2','mt3']
+        });
+        var googleTraffic = L.tileLayer('https://{s}.google.com/vt/lyrs=m@221097413,traffic&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            minZoom: 2,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+        });
+        var overlayMaps1 = {
+            "OpenTopoMap":OpenTopoMap,
+            "googleSat":googleSat,
+            "googleHybrid":googleHybrid,
+            "googleTraffic":googleTraffic,
+        }
+
+        var overlayMaps2 = {
+            "OpenTopoMap":OpenTopoMap,
+            "googleSat":googleSat,
+            "googleHybrid":googleHybrid,
+            "googleTraffic":googleTraffic,
+        }
+
+        var map = L.map('map',{ zoomControl: false, layers: [OpenTopoMap, googleSat, googleHybrid, googleTraffic] }).setView([51.505, -0.09], 13);
+        var myLayer1 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+            }).addTo(map);
+        
+        var map1 = L.map('map1',{ zoomControl: false, layers: [OpenTopoMap, googleSat, googleHybrid, googleTraffic] }).setView([51.505, -0.09], 13);
+        var myLayer2 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+            }).addTo(map1);
+            
+        // Add a layer control element to the map
+        var layerControl1 = L.control.layers(null, overlayMaps1, {position: 'topleft'});
+        layerControl1.addTo(map);
+
+        var layerControl2 = L.control.layers(null, overlayMaps1, {position: 'topright'});
+        layerControl2.addTo(map1);
+        
+        //Copy Map position and have them refelct seamlessly
+        //Zoom
+        var zoomLeft=0
+        var zoomRight=0
+        document.querySelector('#leftSplit').addEventListener('mousemove',()=>{
+           
+            map1.setZoom(map.getZoom())
+            map1.panTo(map.getCenter());
+        })
+        document.querySelector('#rightSplit').addEventListener('mousemove',()=>{
+            map.setZoom(map1.getZoom())
+            map.panTo(map1.getCenter());
+        })
+
+
+    </script>
+    <script src="./index.js"></script>
+</body>
+</html>

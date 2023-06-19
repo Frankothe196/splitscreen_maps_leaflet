@@ -3,7 +3,7 @@
 <img
   src="splitscreen-app.png"
   alt="Alt text"
-  title="white noise over image example"
+  title="Split screen map screenshot"
   style="display: inline-block; margin: 0 auto; max-width: 80%"/>
 
 ## StoryMaps created in vanilla HTML and CSS (simple example/implementation)
@@ -11,5 +11,5 @@
 <img
   src="storymap-app.png"
   alt="Alt text"
-  title="white noise over image example"
+  title="Story maps app screenshot"
   style="display: inline-block; margin: 0 auto; max-width: 80%"/>

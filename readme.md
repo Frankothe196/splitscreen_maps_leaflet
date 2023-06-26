@@ -1,5 +1,6 @@
 # EO Maps Split screen and StoryMaps
 ## Split screen maps with leaflet. Awesome product for contrasting imagery and EO products
+### NB: The drag button doesnt work too well, but it should be simple to fix/modify.
 <img
   src="splitscreen-app.png"
   alt="Alt text"

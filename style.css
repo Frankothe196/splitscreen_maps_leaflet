@@ -51,6 +51,11 @@
     border-radius: 50%;
     padding: 5px;
     cursor: pointer;
+    background: red;
+}
+
+.container .burger img{
+    pointer-events: none;
 }
 
 .container .left .map{

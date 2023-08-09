@@ -20,16 +20,18 @@ const moveLeftWindow = (e)=>{
     }
 }
 
-const handleMouseDown = ()=>{
-    statMove = true
-}
-
-const handleMouseUp = ()=>{
-    statMove = false
+const handleSliderAction = (target)=>{
+    if(target){
+        document.getElementById('mBurger').style.background='red'
+    }else{
+        document.getElementById('mBurger').style.background='rgba(0,255,0,0.4)'
+    }
+    statMove=!target
 }
 
 window.addEventListener('mousemove',moveLeftWindow)
 
-//burger click events
-burger.addEventListener('mousedown', handleMouseDown)
-burger.addEventListener('mouseleave', handleMouseUp)
+//burger click event
+burger.addEventListener('click', ()=>{
+    handleSliderAction(statMove) 
+})
